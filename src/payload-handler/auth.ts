@@ -27,6 +27,7 @@ export function signup(
             invalid_type_error: ERROR_MESSAGES.invalidPassword,
           })
           .min(4, ERROR_MESSAGES.invalidPassword),
+        role: zod.enum(['admin', 'blogger']).default('blogger'),
       },
       {
         required_error: ERROR_MESSAGES.noPayloadProvided,

@@ -16,6 +16,9 @@ export async function signup(request: Request, response: Response) {
     const exists = await prisma.user.findFirst({ where: { email } })
     if (exists) throw new Error(ERROR_MESSAGES.userAlreadyRegistered)
 
+    const totalAdmins = await prisma.user.count({ where: { role: 'admin' } })
+    if (totalAdmins <= 0) payload['role'] = 'admin'
+    else payload['role'] = 'blogger'
     payload['email'] = email.toLowerCase()
   } catch (error) {
     return response
@@ -26,7 +29,12 @@ export async function signup(request: Request, response: Response) {
   try {
     const hashedPassword = await bcrypt.hash(payload.password!)
     const created = await prisma.user.create({
-      data: { email: payload.email!, password: hashedPassword },
+      data: {
+        name: payload.name!,
+        email: payload.email!,
+        password: hashedPassword,
+        role: payload.role!,
+      },
     })
     const token = jwt.getToken({ id: created.id, email: created.email })
 
