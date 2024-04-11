@@ -12,7 +12,7 @@ export async function create(request: AuthRequest, response: Response) {
   const payload = request.body as NewPost
 
   try {
-    if (!file?.filename) throw new Error('O media do artigo é obrigatório')
+    if (!file?.filename) throw new Error('o banner  do artigo é obrigatório')
 
     const { title, categoryId } = payloadHandler.post.createPost(payload)!
 

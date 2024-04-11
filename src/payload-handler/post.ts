@@ -3,8 +3,9 @@ import { NewPost } from '@/@types/post'
 import { ERROR_MESSAGES } from '@/config'
 import { throwZodError } from '@/lib/zod'
 import { z as zod } from 'zod'
+import { PayloadHandlerConfig } from './@types'
 
-export function createPost(payload: NewPost) {
+export function createPost(payload: NewPost, config?: PayloadHandlerConfig) {
   try {
     const schema = zod.object(
       {
@@ -29,7 +30,10 @@ export function createPost(payload: NewPost) {
 
     return schema.parse(payload)
   } catch (error) {
-    throwZodError(error)
+    if (config && config.onError) {
+      const message = config.onError((error as Error).message)
+      throw new Error(message)
+    } else throwZodError(error)
   }
 }
 
