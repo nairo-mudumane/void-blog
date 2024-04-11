@@ -12,7 +12,7 @@ export async function create(request: AuthRequest, response: Response) {
   try {
     if (reqUser.role !== 'admin') throw new Error(ERROR_MESSAGES.notAllowed)
 
-    const { label } = payloadHandler.postCategory.create(payload)!
+    const { label } = payloadHandler.post.createPostCategory(payload)!
 
     const exists = await prisma.postCategory.findFirst({ where: { label } })
     if (exists) throw new Error('categoria já existe')

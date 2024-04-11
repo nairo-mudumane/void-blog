@@ -15,5 +15,8 @@ export function ApiReturn(
       }
     }
 
+  if (payload.data)
+    if (Array.isArray(payload.data)) payload['count'] = payload.data.length
+
   return { message, ...payload }
 }

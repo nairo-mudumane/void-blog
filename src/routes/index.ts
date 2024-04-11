@@ -1,11 +1,11 @@
 import { NotFound } from '@/controllers/not-found'
 import { Express } from 'express'
 import { AuthRouter } from './auth'
-import { PostCategoryRouter } from './post-category'
+import { PostRouter } from './post'
 
 export function ServerRoutes(server: Express) {
   server.use('/accounts/auth', AuthRouter)
-  server.use('/posts/categories', PostCategoryRouter)
+  server.use('/posts', PostRouter)
 
   server.all('*', NotFound)
 }

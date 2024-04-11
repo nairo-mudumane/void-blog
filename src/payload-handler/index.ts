@@ -1,4 +1,4 @@
 import * as auth from './auth'
-import * as postCategory from './post-category'
+import * as post from './post'
 
-export const payloadHandler = { auth, postCategory }
+export const payloadHandler = { auth, post }

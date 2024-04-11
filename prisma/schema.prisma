@@ -20,6 +20,7 @@ model User {
   name           String
   role           String
   postCategories PostCategory[]
+  posts          Post[]
 
   @@map("users")
 }
@@ -32,6 +33,23 @@ model PostCategory {
   createdBy   User   @relation(fields: [createdById], references: [id])
   createdById String
   label       String
+  Post        Post[]
 
   @@map("categories")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdBy   User         @relation(fields: [createdById], references: [id])
+  createdById String
+  category    PostCategory @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  title       String
+  body        String
+  media       String?
+
+  @@map("posts")
 }
