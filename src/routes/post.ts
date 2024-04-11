@@ -14,7 +14,12 @@ router.post(
   imageUpload.single('media'),
   controller.create as Application,
 )
-router.post('/sync-offline',imageUpload.array('media'),controller. as Application)
+router.post(
+  '/sync-offline',
+  privateRoute,
+  imageUpload.array('media'),
+  controller.createOffline as Application,
+)
 router.post(
   '/categories',
   privateRoute,
