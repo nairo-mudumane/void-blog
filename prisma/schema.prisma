@@ -15,8 +15,23 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email    String @unique
-  password String
-  name     String
-  role     String
+  email          String         @unique
+  password       String
+  name           String
+  role           String
+  postCategories PostCategory[]
+
+  @@map("users")
+}
+
+model PostCategory {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdBy   User   @relation(fields: [createdById], references: [id])
+  createdById String
+  label       String
+
+  @@map("categories")
 }

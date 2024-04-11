@@ -1,4 +1,4 @@
-import { ENV } from '@/lib/env'
+import { ENV } from '@/lib/zod'
 import { ServerRoutes } from '@/routes'
 import cors from 'cors'
 import express from 'express'

@@ -1,6 +1,6 @@
 import { JwtUser } from '@/@types'
 import { JwtPayload, verify as _verify, sign } from 'jsonwebtoken'
-import { ENV } from './env'
+import { ENV } from './zod'
 
 function getToken(data: JwtUser): string {
   const now = new Date()
