@@ -1,10 +1,11 @@
+import { NewUser } from '@/@types'
 import { ERROR_MESSAGES } from '@/config'
 import { ApiReturn } from '@/http/api-return'
 import bcrypt from '@/lib/bcrypt'
+import jwt from '@/lib/jwt'
 import { prisma } from '@/lib/prisma'
 import { payloadHandler } from '@/payload-handler'
 import { Request, Response } from 'express'
-import { NewUser } from 'user'
 
 export async function signup(request: Request, response: Response) {
   const payload = request.body as NewUser
@@ -25,12 +26,18 @@ export async function signup(request: Request, response: Response) {
   try {
     const hashedPassword = await bcrypt.hash(payload.password!)
     const created = await prisma.user.create({
-      data: { email: payload.email, password: hashedPassword },
+      data: { email: payload.email!, password: hashedPassword },
     })
+    const token = jwt.getToken({ id: created.id, email: created.email })
 
     return response
       .status(201)
-      .json(ApiReturn({ count: 1, data: created }, { remove: ['password'] }))
+      .json(
+        ApiReturn(
+          { count: 1, data: { ...created, token } },
+          { remove: ['password'] },
+        ),
+      )
   } catch (error) {
     return response
       .status(500)

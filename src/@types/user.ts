@@ -1,4 +1,4 @@
-import { DbAttr, DbAttrKeys } from 'core'
+import { DbAttr, DbAttrKeys } from '@/@types'
 
 export interface User extends DbAttr {
   name: string
@@ -7,3 +7,7 @@ export interface User extends DbAttr {
 }
 
 export type NewUser = Partial<Omit<User, DbAttrKeys>>
+
+export type JwtUser = Pick<User, 'email' | 'id'>
+
+export type LoginUser = Pick<User, 'email' | 'password'>

@@ -1,7 +1,6 @@
+import { NewUser, UndoPartial } from '@/@types'
 import { ERROR_MESSAGES } from '@/config'
 import { throwZodError } from '@/lib/zod'
-import { UndoPartial } from 'core'
-import { NewUser } from 'user'
 import { z as zod } from 'zod'
 
 export function signup(

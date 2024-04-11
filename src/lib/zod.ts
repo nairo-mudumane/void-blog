@@ -1,6 +1,14 @@
-import { ZodError } from 'zod'
+import { z as zod, ZodError } from 'zod'
 
-function throwZodError(error: unknown): void {
+const schema = zod.object({
+  PORT: zod.string().min(4),
+  KNOWN_ORIGINS: zod.string(),
+  JWT_SECRET: zod.string().min(6),
+})
+
+export const ENV = schema.parse(process.env)
+
+export function throwZodError(error: unknown): void {
   let message = (error as Error).message
 
   if (error instanceof ZodError) {
@@ -10,5 +18,3 @@ function throwZodError(error: unknown): void {
 
   throw new Error(message)
 }
-
-export { throwZodError }

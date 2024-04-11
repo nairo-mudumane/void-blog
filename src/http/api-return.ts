@@ -1,4 +1,4 @@
-import { ApiReturn } from 'core'
+import { ApiReturn } from '@/@types'
 
 interface Config {
   remove?: string[]
