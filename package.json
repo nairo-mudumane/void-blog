@@ -1,0 +1,38 @@
+{
+  "name": "void-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/http/server",
+  "engines": {
+    "node": ">=21",
+    "pnpm": ">=8"
+  },
+  "packageManager": ">=pnpm@8.15.5",
+  "scripts": {
+    "dev": "tsx watch --env-file .env ./src/http/server",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build": "tsc",
+    "start": "node --env-file .env ./dist/http/server"
+  },
+  "author": {
+    "email": "nazirmudumane@gmail.com",
+    "name": "Nairo Mudumane",
+    "url": "https://github.com/nairo-mudumane"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "eslint": "^9.0.0",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5"
+  }
+}
